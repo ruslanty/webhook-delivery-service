@@ -33,7 +33,7 @@ services:
         condition: service_healthy
 
   database:
-    image: mariadb:13
+    image: mariadb:13.0.2
     environment:
       MARIADB_DATABASE: webhook
       MARIADB_USER: webhook
@@ -49,7 +49,7 @@ services:
       retries: 10
 
   cache:
-    image: valkey/valkey:9.1
+    image: valkey/valkey:9.1.2
     command: [ "valkey-server", "--appendonly", "yes" ]
     volumes:
       - cache:/data

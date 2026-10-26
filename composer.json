@@ -3,15 +3,15 @@
     "description": "A small PHP service for receiving and processing webhooks.",
     "type": "project",
     "require": {
-        "php": ">=8.5",
+        "php": ">=8.5.12",
         "ext-curl": "*",
         "ext-pdo": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^13.4",
         "friendsofphp/php-cs-fixer": "^3.95",
-        "phpstan/phpstan": "^2.2",
-        "rector/rector": "^2.6"
+        "phpstan/phpstan": "^2.3",
+        "rector/rector": "^2.7"
     },
     "autoload": {
         "psr-4": {

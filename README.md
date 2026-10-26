@@ -8,15 +8,15 @@ Small PHP service for accepting webhooks, storing them in MariaDB and delivering
 
 ## Technology stack
 
-- PHP 8.5
-- FrankenPHP
-- MariaDB 13
-- Valkey 9.1
-- PDO
-- PHPUnit 13.4
-- PHPStan 2.2
-- PHP-CS-Fixer 3.95
-- Rector 2.6
+- PHP 8.5.12
+- FrankenPHP 1.13.3
+- Composer 2.10.3
+- MariaDB 13.0.2
+- Valkey 9.1.2
+- PHPUnit 13.4.3
+- PHPStan 2.3.2
+- PHP-CS-Fixer 3.95.27
+- Rector 2.7.0
 
 ## Usage
 
