@@ -27,10 +27,9 @@ final class HttpDeliveryClient implements DeliveryClient
             CURLOPT_TIMEOUT => 10,
         ]);
 
-        $status = curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
-
         curl_exec($handle);
 
+        $status = curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
         $error = curl_error($handle);
 
         if ($error !== ''
