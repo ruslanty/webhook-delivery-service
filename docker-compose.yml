@@ -1,0 +1,59 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: [ "frankenphp", "run", "--config", "/app/docker/Caddyfile" ]
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: database
+      DB_DATABASE: webhook
+      DB_USERNAME: webhook
+      DB_PASSWORD: webhook
+    depends_on:
+      database:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    entrypoint: [ "php" ]
+    command: [ "bin/worker.php" ]
+    healthcheck:
+      disable: true
+    environment:
+      DB_HOST: database
+      DB_DATABASE: webhook
+      DB_USERNAME: webhook
+      DB_PASSWORD: webhook
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mariadb:13
+    environment:
+      MARIADB_DATABASE: webhook
+      MARIADB_USER: webhook
+      MARIADB_PASSWORD: webhook
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - database:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  cache:
+    image: valkey/valkey:9.1
+    command: [ "valkey-server", "--appendonly", "yes" ]
+    volumes:
+      - cache:/data
+
+volumes:
+  database:
+  cache:

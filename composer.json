@@ -1,0 +1,37 @@
+{
+    "name": "ruslanty/webhook-delivery-service",
+    "description": "A small PHP service for receiving and processing webhooks.",
+    "type": "project",
+    "require": {
+        "php": ">=8.5",
+        "ext-curl": "*",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.4",
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "rector/rector": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse",
+        "cs": "php-cs-fixer fix --dry-run --diff",
+        "rector": "rector process --dry-run",
+        "quality": "phpunit && phpstan analyse && php-cs-fixer fix --dry-run --diff && rector process --dry-run"
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    }
+}
